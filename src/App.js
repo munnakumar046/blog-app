@@ -66,6 +66,7 @@ const deleteBlog = (id) => {
         deleteBlog={deleteBlog}
         setEditData={setEditData}
       />
+      <h1>Hello from git</h1>
     </div>
   );
 }
