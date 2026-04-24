@@ -1,0 +1,24 @@
+.container {
+  width: 500px;
+  margin: auto;
+  text-align: center;
+  background: rgb(34, 144, 178);
+}
+
+input, textarea {
+  width: 100%;
+  margin: 5px 0;
+  padding: 8px;
+}
+
+button {
+  margin: 5px;
+  padding: 8px 12px;
+  cursor: pointer;
+}
+
+.blog-item {
+  border: 1px solid #ccc;
+  margin: 10px 0;
+  padding: 10px;
+}
