@@ -1,30 +1,25 @@
+// lib/auth.ts
 import { betterAuth } from "better-auth";
 import { mongodbAdapter } from "better-auth/adapters/mongodb";
-import { connectDB } from "./db";
+import { MongoClient } from "mongodb";
+
+const client = new MongoClient(
+  process.env.MONGODB_URI || "mongodb://localhost:27017/ecommerce",
+);
+await client.connect();
+const db = client.db();
 
 export const auth = betterAuth({
-  // Dynamic initialization closure solves the 500 server crash
-  database: async () => {
-    const mongooseInstance = await connectDB();
-    const db = mongooseInstance.connection.db;
-
-    if (!db) {
-      throw new Error(
-        "Better Auth could not catch the active MongoDB driver instance.",
-      );
-    }
-
-    return mongodbAdapter(db);
-  },
+  database: mongodbAdapter(db),
 
   emailAndPassword: {
     enabled: true,
-    autoSignIn: true, // Logs the user in automatically upon successful registration
+    autoSignIn: true,
   },
 
   advanced: {
     database: {
-      generateId: false, // Essential configuration for Mongoose ObjectIds
+      generateId: false,
     },
     trustedProxyHeaders: true,
   },
